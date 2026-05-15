@@ -89,7 +89,7 @@ fun HomeScreen(viewModel: DashboardViewModel) {
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Between,
+                            horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.Top
                         ) {
                             Column {

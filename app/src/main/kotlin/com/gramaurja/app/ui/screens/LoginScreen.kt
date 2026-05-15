@@ -2,6 +2,9 @@ package com.gramaurja.app.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FlashOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -45,7 +48,7 @@ fun LoginScreen(viewModel: AuthViewModel, onLoginSuccess: () -> Unit, onNavigate
         ) {
             Box(contentAlignment = Alignment.Center) {
                 Icon(
-                    imageVector = androidx.compose.material.icons.Icons.Default.Bolt,
+                    imageVector = Icons.Default.FlashOn,
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(32.dp)

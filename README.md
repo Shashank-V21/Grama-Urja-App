@@ -1,45 +1,43 @@
-# Grama-Urja: Rural Power Monitoring App (Android)
+# Grama-Urja: Rural Solar Microgrid Management
 
-Grama-Urja (ಗ್ರಾಮ-ಊರ್ಜಾ) is a native Android application built with Kotlin and Jetpack Compose for rural power monitoring and irrigation support in Karnataka.
+Grama-Urja is a community-driven Android application designed to manage and monitor solar-powered irrigation pumps and microgrid status in rural villages.
 
 ## Features
-- **Real-time Power Status**: Check if a transformer zone is ON/OFF/UNKNOWN.
-- **Village & Zone Selection**: Tailored monitoring for your specific field location.
-- **Pump Control (Admin/Operator)**: Remotely start or stop irrigation pumps.
-- **Irrigation Estimator**: Calculate pump running time based on crop type and acres.
-- **Notifications**: Receive alerts when power status changes.
-- **Admin Panel**: Manage villages, zones, and users.
-- **Multi-language Support**: English and Kannada.
+- **Real-time Grid Monitoring:** Get instant updates on Power ON/OFF status for your specific transformer zone.
+- **Smart Pump Control:** Start and stop irrigation pumps based on power availability.
+- **Usage History:** Track your pumping sessions and energy usage.
+- **Admin Panel:** Manage village zones, users, and transformer status (Admin only).
+- **Multilingual:** Supports English and Kannada for rural accessibility.
 
-## Technology Stack
-- **Language**: Kotlin 2.2.10
-- **UI Framework**: Jetpack Compose (Material 3)
-- **Architecture**: MVVM + Repository Pattern
-- **Reactive Programming**: Kotlin Coroutines & Flow
-- **Backend**: Firebase (Authentication & Firestore)
-- **Navigation**: Navigation Compose
+## Firebase Setup Instructions
+To get this app running on your device, follow these steps:
 
-## Project Structure
-- `app/src/main/kotlin/com/gramaurja/app/data`: Models and Repositories.
-- `app/src/main/kotlin/com/gramaurja/app/ui`: ViewModels and Compose Screens.
-- `app/src/main/res`: XML resources including English and Kannada strings.
-- `firestore.rules`: Secure rules for the database.
+1. **Create Firebase Project:** Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project named "Grama-Urja".
+2. **Add Android App:**
+   - Register the app with package name: `com.gramaurja.app`
+   - Download the `google-services.json` file.
+   - Place this file inside the `app/` folder of this project.
+3. **Enable Authentication:**
+   - Go to the Authentication section.
+   - Enable the **Email/Password** sign-in provider.
+4. **Enable Cloud Firestore:**
+   - Create a database in **Production** or **Test** mode.
+   - Deploy the security rules (see `firestore.rules` if provided or use default allowed for development).
+5. **Real-time Setup:**
+   - The app will automatically seed sample data (Villages, Zones) on the first login.
 
-## Setup Instructions for Android Studio
-1. **Export the Project**: Use the export tool in AI Studio to download the ZIP file.
-2. **Open in Android Studio**: Extract and open the project.
-3. **Firebase Setup**:
-   - Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com).
-   - Add an Android app with package name `com.gramaurja.app`.
-   - Download `google-services.json` and place it in the `app/` directory.
-   - Enable Email/Password authentication and Firestore.
-4. **Build & Run**: Sync Gradle and run on a device or emulator.
+## How to Test Real-time Updates
+1. **Using Two Devices/Tabs:**
+   - Log in as a User on one device (or the AI Studio preview).
+   - Log in as an Admin on another device.
+   - As an Admin, toggle the "Power Grid" status in the Admin Panel.
+   - Observe the "Power Status" card on the User's Home screen updating instantly without refresh.
+2. **Zone Partitioning:**
+   - Create two users in different Transformer Zones.
+   - Toggle power for Zone A; only the user in Zone A should see the status change.
 
-## How to Test
-- **Login/Register**: Use a test email and password.
-- **Onboarding**: Complete the profile and select the sample village "Angondhalli".
-- **Real-time Status**: Use the Admin Panel (in Simulation Mode or via Firestore console) to change the `powerStatus` for a zone.
-- **Pump Control**: Navigate to the Pump tab and test the Start/Stop buttons (requires Admin role).
-
-## Seed Data
-The project includes a `SeedData` utility to populate your Firestore database with a sample village and zones for demo purposes.
+## Tech Stack
+- **Kotlin:** 1.9.23
+- **Jetpack Compose:** Material 3
+- **Firebase:** Auth, Firestore, Messaging (BOM 32.8.0)
+- **Coroutines:** Flow for real-time data streams

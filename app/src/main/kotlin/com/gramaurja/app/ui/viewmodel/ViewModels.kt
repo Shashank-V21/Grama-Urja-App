@@ -43,6 +43,11 @@ class DashboardViewModel(
         .flatMapLatest { profile -> powerRepo.observePowerStatus(profile.zoneId) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
+    val powerHistory: StateFlow<List<StatusHistory>> = _userProfile
+        .filterNotNull()
+        .flatMapLatest { profile -> powerRepo.observeStatusHistory(profile.zoneId) }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     init {
         authRepo.getCurrentUser()?.uid?.let { uid ->
             viewModelScope.launch {
@@ -63,6 +68,11 @@ class PumpViewModel(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
 
     fun setZone(zoneId: String) { _zoneId.value = zoneId }
+
+    val pumpLogs: StateFlow<List<PumpLog>> = authRepo.getCurrentUser()?.uid?.let { uid ->
+        pumpRepo.observeUserLogs(uid)
+    }?.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        ?: MutableStateFlow(emptyList())
 
     fun togglePump(status: String, userName: String) {
         viewModelScope.launch {

@@ -62,6 +62,21 @@ class PowerRepository(private val db: FirebaseFirestore = FirebaseFirestore.getI
             }
         awaitClose { listener.remove() }
     }
+
+    suspend fun updatePowerStatus(zoneId: String, status: String, updatedBy: String, updatedByUserId: String) {
+        val powerData = PowerStatus(zoneId, status, com.google.firebase.Timestamp.now(), updatedBy, updatedByUserId)
+        db.collection("powerStatus").document(zoneId).set(powerData).await()
+        
+        // Add to history
+        val history = StatusHistory(
+            zoneId = zoneId,
+            status = status,
+            updatedAt = com.google.firebase.Timestamp.now(),
+            updatedBy = updatedBy,
+            updatedByUserId = updatedByUserId
+        )
+        db.collection("statusHistory").add(history).await()
+    }
 }
 
 class PumpRepository(private val db: FirebaseFirestore = FirebaseFirestore.getInstance()) {
@@ -80,5 +95,30 @@ class PumpRepository(private val db: FirebaseFirestore = FirebaseFirestore.getIn
     suspend fun updatePumpStatus(zoneId: String, status: String, userId: String, userName: String) {
         val statusData = PumpStatus(zoneId, status, com.google.firebase.Timestamp.now(), userName, userId)
         db.collection("pumpStatus").document(zoneId).set(statusData).await()
+        
+        // Log the action
+        val log = PumpLog(
+            zoneId = zoneId,
+            userId = userId,
+            userName = userName,
+            action = status,
+            status = if (status == "ON") "running" else "stopped",
+            startTime = if (status == "ON") com.google.firebase.Timestamp.now() else null,
+            stopTime = if (status == "OFF") com.google.firebase.Timestamp.now() else null,
+            createdAt = com.google.firebase.Timestamp.now()
+        )
+        db.collection("pumpLogs").add(log).await()
+    }
+
+    fun observeUserLogs(userId: String): Flow<List<PumpLog>> = callbackFlow {
+        val listener = db.collection("pumpLogs")
+            .whereEqualTo("userId", userId)
+            .orderBy("createdAt", com.google.firebase.firestore.Query.Direction.DESCENDING)
+            .limit(50)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) return@addSnapshotListener
+                trySend(snapshot?.toObjects(PumpLog::class.java) ?: emptyList())
+            }
+        awaitClose { listener.remove() }
     }
 }
