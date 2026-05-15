@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ಗ್ರಾಮ-ಊರ್ಜಾ</string>
+    <string name="tagline">ಗ್ರಾಮೀಣ ಕರ್ನಾಟಕಕ್ಕಾಗಿ ಸಮುದಾಯ ವಿದ್ಯುತ್ ಮಾನಿಟರ್</string>
+    <string name="sign_in_title">ಸೈನ್ ಇನ್ ಮಾಡಿ</string>
+    <string name="use_email_continue">ಮುಂದುವರಿಸಲು ನಿಮ್ಮ ಇಮೇಲ್ ಬಳಸಿ</string>
+    <string name="email">ಇಮೇಲ್</string>
+    <string name="password">ಪಾಸ್ವರ್ಡ್</string>
+    <string name="sign_in_button">ಸೈನ್ ಇನ್</string>
+    <string name="sign_up_option">ಖಾತೆ ಇಲ್ಲವೇ? ಸೈನ್ ಅಪ್ ಮಾಡಿ</string>
+    <string name="footer_monitor">ಸಮುದಾಯ ವಿದ್ಯುತ್ ಮಾನಿಟರ್</string>
+    <string name="kannada_name">ಗ್ರಾಮ-ಊರ್ಜಾ</string>
+    <string name="language_toggle">EN / ಕನ್ನಡ</string>
+</resources>

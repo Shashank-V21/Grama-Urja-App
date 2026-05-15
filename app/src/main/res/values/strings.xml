@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Grama-Urja</string>
+    <string name="tagline">Community Power Monitor for Rural Karnataka</string>
+    <string name="sign_in_title">Sign in</string>
+    <string name="use_email_continue">Use your email to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="sign_up_option">Don\'t have an account? Sign Up</string>
+    <string name="footer_monitor">Community Power Monitor</string>
+    <string name="kannada_name">ಗ್ರಾಮ-ಊರ್ಜಾ</string>
+    <string name="language_toggle">EN / ಕನ್ನಡ</string>
+</resources>

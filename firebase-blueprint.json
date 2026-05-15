@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile and settings",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "mobile": { "type": "string" },
+        "villageId": { "type": "string" },
+        "zoneId": { "type": "string" },
+        "role": { "type": "string" },
+        "onboarded": { "type": "boolean" }
+      },
+      "required": ["userId", "email", "role"]
+    },
+    "Village": {
+      "title": "Village",
+      "description": "Rural village data",
+      "type": "object",
+      "properties": {
+        "villageName": { "type": "string" },
+        "district": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User data collection"
+    },
+    "/villages": {
+      "schema": "Village",
+      "description": "List of villages"
+    }
+  }
+}

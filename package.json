@@ -1,0 +1,9 @@
+{
+  "name": "grama-urja-android",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Native Android build context. For local development, export to ZIP and open in Android Studio.'",
+    "dev": "echo 'Native Android dev context. For local development, export to ZIP and open in Android Studio.' && sleep infinity"
+  }
+}
