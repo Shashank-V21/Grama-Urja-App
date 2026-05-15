@@ -23,17 +23,28 @@ android {
         }
     }
 
-    // REMOVED custom signingConfigs to fix the 'Keystore not found' error
+    // ADDED: Professional Signing Configuration for Play Store
+    signingConfigs {
+        create("release") {
+            // This assumes your .jks file is in the main project folder
+            storeFile = file("${rootDir}/my_debug_key.jks")
+            storePassword = "android" // Replace with the password you set
+            keyAlias = "key0" // Replace if you chose a different alias
+            keyPassword = "android" // Replace with the password you set
+        }
+    }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true // Enabled for Play Store (shrinks the app)
+            signingConfig = signingConfigs.getByName("release") // Connects the key
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
-            // REMOVED custom signingConfig so it uses the system default debug key
+            // Uses default system key for fast testing
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
