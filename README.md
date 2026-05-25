@@ -1,4 +1,4 @@
-# Grama-Urja: Rural Solar Microgrid Management
+# Grama-Urja: Energy
 
 Grama-Urja is a community-focused Android application built to empower rural communities with real-time monitoring of solar-powered microgrids and smart control of irrigation pumps. It facilitates efficient energy usage and provides transparency in power distribution.
 
